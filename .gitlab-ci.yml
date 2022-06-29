@@ -1,3 +1,10 @@
+variables:
+   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+    
 stages:
   - build
   - integration-test
@@ -10,6 +17,7 @@ build-job:
   image: openjdk:17
   script: 
     - echo 'Executing build'
+    - ./mvnw package
 
 integration-test-job:
   stage: integration-test
